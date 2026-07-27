@@ -1,24 +1,24 @@
 name: build and compile
 
 on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
-  workflow_dispatch:
+    push:
+        branches: [master]
+    pull_request:
+        branches: [master]
+    workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: windows-latest
-    steps: 
-      - uses: actions/checkout@v4
-      - name: Install Ninja
-        uses: seanmiddleditch/gha-setup-ninja@master
-      - name: setup vcpkg
-        uses: actions/setup-vcpkg@v1
-        with: 
-          vcpkgGitCommitId: '2025.01.13'
-      - name: build 
-        run: cmake -B build -S . -G Ninja
-      - name: compile 
-        run: ninja -C build
+    build:
+        runs-on: windows-latest
+        steps:
+            - uses: actions/checkout@v4
+            - name: Install Ninja
+              uses: seanmiddleditch/gha-setup-ninja@master
+            - name: setup vcpkg
+              uses: lukka/run-vcpkg@v11
+              with:
+                  vcpkgGitCommitId: "2025.01.13"
+            - name: build
+              run: cmake -B build -S . -G Ninja
+            - name: compile
+              run: ninja -C build
