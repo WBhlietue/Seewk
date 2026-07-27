@@ -14,6 +14,10 @@ jobs:
             - uses: actions/checkout@v4
             - name: Install Ninja
               uses: seanmiddleditch/gha-setup-ninja@master
+            - name: Setup MSVC environment
+              uses: ilammy/msvc-dev-cmd@v1
+              with:
+                arch: x64
             - name: Clone vcpkg
               run: |
                 git clone https://github.com/Microsoft/vcpkg.git C:\vcpkg
@@ -22,10 +26,6 @@ jobs:
               run: echo "VCPKG_ROOT=C:\vcpkg" >> $env:GITHUB_ENV
             - name: Add vcpkg to PATH
               run: echo "C:\vcpkg" >> $env:GITHUB_PATH
-              name: Setup MSVC environment
-              uses: ilammy/msvc-dev-cmd@v1
-              with:
-                arch: x64
             - name: build
               run: cmake -B build -S . -G Ninja
             - name: compile
