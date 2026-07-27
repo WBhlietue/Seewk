@@ -16,8 +16,6 @@ jobs:
               uses: seanmiddleditch/gha-setup-ninja@master
             - name: setup vcpkg
               uses: lukka/run-vcpkg@v11
-              with:
-                  vcpkgGitCommitId: "2025.01.13"
             - name: build
               run: cmake -B build -S . -G Ninja
             - name: compile
